@@ -40,10 +40,10 @@ body.modal-open{overflow:hidden}.product-modal[hidden]{display:none}.product-mod
 @media(max-width:600px){.hero{background-position:62% center}.hero-product-stage{inset:15px -10px 35px}.hero-product-current{width:330px!important;height:395px!important}.hero-product-label{right:6px;bottom:20px}.hero-dots{right:12px;bottom:0}.hero-visual .hero-note{left:0;bottom:5px}}
 
 /* Compact premium product showcase */
-.hero-product-stage{inset:70px 45px 90px 130px;border:1px solid rgba(255,255,255,.65);border-radius:28px;background:linear-gradient(145deg,rgba(255,255,255,.46),rgba(255,255,255,.16));backdrop-filter:blur(7px) saturate(115%);box-shadow:0 24px 70px rgba(16,39,25,.16),inset 0 1px rgba(255,255,255,.8);overflow:visible}
+.hero-product-stage{inset:70px 45px 90px 130px;border:1px solid rgba(255,255,255,.7);border-radius:28px;background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.06));backdrop-filter:blur(3px) saturate(110%);box-shadow:0 24px 70px rgba(16,39,25,.13),inset 0 1px rgba(255,255,255,.8);overflow:visible}
 .hero-product-stage:before{content:"";position:absolute;width:85px;height:85px;border:1px solid rgba(255,210,26,.8);border-radius:50%;right:-25px;top:-25px;box-shadow:0 0 0 13px rgba(255,210,26,.13)}
 .hero-product-stage:after{content:"HSC";position:absolute;left:-17px;top:34px;writing-mode:vertical-rl;padding:13px 7px;background:var(--yellow);border-radius:8px;color:var(--blue);font-size:9px;font-weight:800;letter-spacing:2px;box-shadow:0 8px 20px rgba(25,44,27,.14)}
-.hero-product-current{width:300px!important;height:365px!important;border-radius:18px;filter:drop-shadow(0 22px 18px rgba(13,38,25,.22));mix-blend-mode:multiply}
+.hero-product-current{width:300px!important;height:365px!important;border-radius:18px;filter:drop-shadow(0 22px 18px rgba(13,38,25,.25));mix-blend-mode:normal}
 .hero-product-label{right:-22px;bottom:22px;border-left:3px solid var(--yellow);background:rgba(255,255,255,.9)}
 .hero-dots{right:57px;bottom:54px}.hero-dots span{background:rgba(41,47,135,.28)}.hero-dots span.active{background:var(--yellow)}
 @media(max-width:900px){.hero-product-stage{inset:60px 70px 85px}.hero-product-current{width:290px!important;height:350px!important}.hero-dots{right:82px;bottom:52px}}
