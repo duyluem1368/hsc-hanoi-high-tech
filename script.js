@@ -19,6 +19,18 @@ let lastTrigger=null;
 function productCard(p){return `<article class="product-card" data-cat="${p.cat}">${p.featured?'<span class="badge">Nổi bật</span>':''}<button class="product-open" type="button" data-product="${p.id}" aria-label="Xem chi tiết ${p.name}"><div class="product-img"><img src="${p.image}" alt="${p.name}" loading="lazy"></div><small>${p.type}</small><h3>${p.name}</h3><p>${p.lead}</p><span class="card-link">Xem chi tiết <b>→</b></span></button></article>`}
 grid.innerHTML=products.map(productCard).join('');
 
+const heroImage=document.querySelector('.hero-product-current');
+const heroName=document.querySelector('#heroProductName');
+const heroDots=document.querySelector('.hero-dots');
+const heroProducts=[
+  {name:'Fujimin 20SL',image:'assets/products/fujimin-20sl-cutout.png'},
+  {name:'Inpyranafy 10SC',image:'assets/products/inpyranafy-10sc-cutout.png'}
+];
+let heroIndex=0;
+heroDots.innerHTML=heroProducts.map((_,index)=>`<span class="${index===0?'active':''}"></span>`).join('');
+function showHeroProduct(index){heroIndex=index%heroProducts.length;const product=heroProducts[heroIndex];heroImage.classList.add('switching');setTimeout(()=>{heroImage.src=product.image;heroImage.alt=product.name;heroName.textContent=product.name;heroDots.querySelectorAll('span').forEach((dot,i)=>dot.classList.toggle('active',i===heroIndex));heroImage.classList.remove('switching');},230)}
+setInterval(()=>showHeroProduct(heroIndex+1),3200);
+
 function openProduct(id,trigger){const p=products.find(item=>item.id===id);if(!p)return;lastTrigger=trigger;document.querySelector('#modalImage').src=p.image;document.querySelector('#modalImage').alt=p.name;document.querySelector('#modalType').textContent=p.type;document.querySelector('#modalTitle').textContent=p.name;document.querySelector('#modalLead').textContent=p.lead;document.querySelector('#modalActive').textContent=p.active;document.querySelector('#modalUse').textContent=p.use;document.querySelector('#modalTargets').textContent=p.targets;document.querySelector('#modalCrops').textContent=p.crops;modal.hidden=false;document.body.classList.add('modal-open');modal.querySelector('.modal-close').focus();}
 function closeModal(){modal.hidden=true;document.body.classList.remove('modal-open');lastTrigger?.focus();}
 
