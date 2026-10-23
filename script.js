@@ -59,3 +59,27 @@ toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');tog
 document.querySelectorAll('.filter').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));button.classList.add('active');const value=button.dataset.filter;document.querySelectorAll('.product-card').forEach(card=>{card.hidden=value!=='all'&&!card.dataset.cat.includes(value);});}));
 const requestedProduct=new URLSearchParams(location.search).get('product');
 if(requestedProduct)openProduct(requestedProduct,null);
+
+// Deter casual copying and third-party framing while preserving form controls.
+const copyrightNotice=document.querySelector('#copyrightNotice');
+let copyrightNoticeTimer;
+function showCopyrightNotice(){
+  copyrightNotice.hidden=false;
+  clearTimeout(copyrightNoticeTimer);
+  copyrightNoticeTimer=setTimeout(()=>{copyrightNotice.hidden=true},2200);
+}
+document.querySelectorAll('img').forEach(image=>image.draggable=false);
+document.addEventListener('dragstart',event=>{if(event.target.closest('img'))event.preventDefault()});
+document.addEventListener('contextmenu',event=>{event.preventDefault();showCopyrightNotice()});
+document.addEventListener('copy',event=>{
+  if(event.target.closest('input,textarea,select'))return;
+  event.preventDefault();
+  showCopyrightNotice();
+});
+document.addEventListener('keydown',event=>{
+  const blockedShortcut=(event.ctrlKey||event.metaKey)&&['s','p','u'].includes(event.key.toLowerCase());
+  if(blockedShortcut){event.preventDefault();showCopyrightNotice()}
+});
+if(window.top!==window.self){
+  try{window.top.location.replace(window.self.location.href)}catch(error){document.documentElement.hidden=true}
+}
