@@ -17,6 +17,8 @@ Website giới thiệu và nhận báo giá của Công ty Cổ phần Khoa họ
 
 Ảnh nhận dạng sâu bệnh tại `assets/pests/` được tuyển chọn từ Wikimedia Commons/Wikipedia theo tên khoa học (truy cập 24/10/2026). Ba ảnh minh họa không tìm được nguồn mở đủ rõ — lem lép hạt, chổi rồng nhãn và rầy bông xoài — được tạo riêng bằng công cụ AI theo mô tả khoa học và dùng với mục đích minh họa nhận dạng; chẩn đoán thực địa vẫn cần cán bộ kỹ thuật xác nhận.
 
+Bộ ảnh đã kiểm chứng tại `assets/pests-verified/` lấy từ iNaturalist (chỉ CC0, CC BY, CC BY-SA), Wikimedia Commons và bộ ảnh CC0 “Plant pests and diseases”. Ảnh iNaturalist liên kết trực tiếp về trang ảnh gốc theo ID trong `verifiedPestPhotos`; ảnh bệnh được đối chiếu theo tên khoa học, cây ký chủ và triệu chứng ngoài đồng trước khi sử dụng.
+
 ## Chạy tại máy
 
 Mở `index.html` trực tiếp hoặc chạy một static server trong thư mục dự án.

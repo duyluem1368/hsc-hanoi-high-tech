@@ -24,7 +24,7 @@ function renderDetail(crop) {
   document.querySelector('#detailSummary').textContent = crop.summary;
   document.querySelector('#pestGrid').innerHTML = crop.pests.map((pest, index) => `
     <button class="pest-card" type="button" data-pest="${escapeHtml(pest[0])}" aria-label="Xem chi tiết ${escapeHtml(pest[0])}">
-      <span class="pest-photo"><img src="assets/pests/${pestSlug(pest[0])}.webp" alt="${escapeHtml(pest[0])} trên ${escapeHtml(crop.name.toLowerCase())}" loading="lazy"><b>${String(index + 1).padStart(2, '0')}</b></span>
+      <span class="pest-photo"><img src="${pestPhoto(crop.id,pest[0]).src}" alt="${escapeHtml(pest[0])} trên ${escapeHtml(crop.name.toLowerCase())}" loading="lazy"><b>${String(index + 1).padStart(2, '0')}</b></span>
       <span class="pest-card-content"><small>Sâu, bệnh hại</small><strong>${escapeHtml(pest[0])}</strong><span>${escapeHtml(pest[1])}</span><em>Xem hồ sơ chi tiết →</em></span>
     </button>`).join('');
 }
@@ -39,8 +39,9 @@ function openPest(name, trigger) {
   const pest = crop?.pests.find(item => item[0] === name);
   if (!pest) return;
   const info = pestDetails[name] || pestFallback;
+  const photo = pestPhoto(crop.id, name);
   lastPestTrigger = trigger;
-  document.querySelector('#pestModalImage').src = `assets/pests/${pestSlug(name)}.webp`;
+  document.querySelector('#pestModalImage').src = photo.src;
   document.querySelector('#pestModalImage').alt = `${name} – hình ảnh nhận dạng`;
   document.querySelector('#pestModalCrop').textContent = crop.name;
   document.querySelector('#pestModalTitle').textContent = name;

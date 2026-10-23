@@ -90,3 +90,16 @@ const hscProducts = {
   abavua:['ABAVua 36EC','Abamectin 36 g/L','assets/products/abavua-36ec.jpg'],
   wofara:['Wofara 300WG','Imidacloprid + Thiamethoxam','assets/products/wofara-300wg.jpg']
 };
+
+const verifiedPestPhotos = {
+  'Rầy nâu':['417568380','CC0'],'Sâu cuốn lá nhỏ':['336430459','CC BY-SA'],'Sâu đục thân hai chấm':['441231841','CC BY'],'Bọ trĩ':['11000915','CC0'],'Sâu đục cuống quả':['90043002','CC BY'],'Bọ xít vải':['150658767','CC BY'],'Nhện lông nhung':['238712235','CC BY-SA'],'Rệp sáp':['120917631','CC BY'],'Rầy phấn':['34941437','CC BY-SA'],'Nhện đỏ':['126162327','CC BY'],'Sâu đục thân':['198495000','CC BY'],'Mọt đục quả':['189768581','CC BY-SA'],'Rệp vảy xanh':['40998803','CC0'],'Bọ xít nhãn':['150658767','CC BY'],'Sâu đục gân lá':['90043002','CC BY'],'Rầy bông xoài':['52947849','CC BY'],'Ruồi đục quả':['251816781','CC BY'],'Sâu đục thân cành':['198495000','CC BY'],'Bọ cánh tơ':['11000915','CC0'],'Bọ xít muỗi':['8807972','CC BY'],'Sâu cuốn lá':['584122663','CC0'],'Sâu vẽ bùa':['147676975','CC0'],'Sâu tơ':['113942379','CC BY'],'Sâu xanh bướm trắng':['1179645','CC BY'],'Sâu khoang':['179477544','CC BY'],'Rệp muội':['63103086','CC BY'],'Bọ nhảy':['314493768','CC BY'],'Sâu keo mùa thu':['469891455','CC BY'],'Rệp cờ':['32453679','CC0'],'Sâu xám':['309566532','CC BY']
+};
+const verifiedGenericPhotos = new Set(['Tuyến trùng rễ','Rầy xanh']);
+const verifiedHostPhotos = new Set(['lua--dao-on','lua--bac-la','lua--kho-van','ca-phe--gi-sat','xoai--than-thu','xoai--phan-trang','xoai--xi-mu-than','xoai--dom-den-vi-khuan','che--dom-nau','cay-an-qua--loet-vi-khuan','cay-an-qua--nam-bo-hong','hoa-thap-tu--sung-re','hoa-thap-tu--thoi-nhun','ngo--dom-la-lon','ngo--gi-sat','ngo--thoi-than-thoi-bap']);
+function pestPhoto(cropId, name) {
+  const hostKey = `${cropId}--${pestSlug(name)}`;
+  if (verifiedHostPhotos.has(hostKey)) return {src:`assets/pests-verified/${hostKey}.webp`, source:'Ảnh triệu chứng nguồn mở đã kiểm chứng', href:'#image-sources'};
+  if (verifiedPestPhotos[name]) return {src:`assets/pests-verified/${pestSlug(name)}.webp`, source:`iNaturalist · ${verifiedPestPhotos[name][1]}`, href:`https://www.inaturalist.org/photos/${verifiedPestPhotos[name][0]}`};
+  if (verifiedGenericPhotos.has(name)) return {src:`assets/pests-verified/${pestSlug(name)}.webp`, source:'Wikimedia Commons · giấy phép mở', href:'#image-sources'};
+  return {src:`assets/pests/${pestSlug(name)}.webp`, source:'Ảnh minh họa triệu chứng', href:'#image-sources'};
+}
