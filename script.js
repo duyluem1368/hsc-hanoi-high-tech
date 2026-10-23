@@ -70,6 +70,7 @@ function showCopyrightNotice(){
 }
 document.querySelectorAll('img').forEach(image=>image.draggable=false);
 document.addEventListener('dragstart',event=>{if(event.target.closest('img'))event.preventDefault()});
+document.addEventListener('selectstart',event=>{if(!event.target.closest('input,textarea,select'))event.preventDefault()});
 document.addEventListener('contextmenu',event=>{event.preventDefault();showCopyrightNotice()});
 document.addEventListener('copy',event=>{
   if(event.target.closest('input,textarea,select'))return;
