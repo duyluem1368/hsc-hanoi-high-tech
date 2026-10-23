@@ -23,14 +23,46 @@ function renderDetail(crop) {
   document.querySelector('#detailTitle').textContent = crop.name;
   document.querySelector('#detailSummary').textContent = crop.summary;
   document.querySelector('#pestGrid').innerHTML = crop.pests.map((pest, index) => `
-    <section class="pest-card">
-      <div class="pest-number">${String(index + 1).padStart(2, '0')}</div>
-      <div><h3>${escapeHtml(pest[0])}</h3><h4>Đặc tính & dấu hiệu</h4><p>${escapeHtml(pest[1])}</p><h4>Cách phòng trừ</h4><p>${escapeHtml(pest[2])}</p></div>
-    </section>`).join('');
+    <button class="pest-card" type="button" data-pest="${escapeHtml(pest[0])}" aria-label="Xem chi tiết ${escapeHtml(pest[0])}">
+      <span class="pest-photo"><img src="assets/pests/${pestSlug(pest[0])}.webp" alt="${escapeHtml(pest[0])} trên ${escapeHtml(crop.name.toLowerCase())}" loading="lazy"><b>${String(index + 1).padStart(2, '0')}</b></span>
+      <span class="pest-card-content"><small>Sâu, bệnh hại</small><strong>${escapeHtml(pest[0])}</strong><span>${escapeHtml(pest[1])}</span><em>Xem hồ sơ chi tiết →</em></span>
+    </button>`).join('');
 }
 
 renderCatalog();
 if (selected) renderDetail(selected);
+
+const pestModal = document.querySelector('#pestModal');
+let lastPestTrigger = null;
+function openPest(name, trigger) {
+  const crop = selected;
+  const pest = crop?.pests.find(item => item[0] === name);
+  if (!pest) return;
+  const info = pestDetails[name] || pestFallback;
+  lastPestTrigger = trigger;
+  document.querySelector('#pestModalImage').src = `assets/pests/${pestSlug(name)}.webp`;
+  document.querySelector('#pestModalImage').alt = `${name} – hình ảnh nhận dạng`;
+  document.querySelector('#pestModalCrop').textContent = crop.name;
+  document.querySelector('#pestModalTitle').textContent = name;
+  document.querySelector('#pestScientific').textContent = info[0];
+  document.querySelector('#pestIdentification').textContent = pest[1];
+  document.querySelector('#pestLifecycle').textContent = info[1];
+  document.querySelector('#pestDamage').textContent = info[2];
+  document.querySelector('#pestControl').textContent = pest[2];
+  document.querySelector('#pestChemical').textContent = info[3];
+  const links = info[4].map(id => ({ id, item: hscProducts[id] })).filter(entry => entry.item);
+  document.querySelector('#linkedProducts').innerHTML = links.length ? `<h3>Sản phẩm HSC liên quan</h3><p class="product-scope-note">Sản phẩm được đối chiếu theo hoạt chất/đối tượng. Chỉ sử dụng khi nhãn sản phẩm có đăng ký cho đúng cây trồng và dịch hại đang xử lý.</p><div class="linked-product-grid">${links.map(({id,item}) => `<a href="index.html?product=${id}#products"><img src="${item[2]}" alt="${item[0]}" loading="lazy"><span><strong>${item[0]}</strong><small>${item[1]}</small><b>Xem sản phẩm →</b></span></a>`).join('')}</div>` : '<p class="no-product">HSC chưa có sản phẩm trong danh mục trực tuyến khớp trực tiếp với đối tượng này. Vui lòng gửi mẫu hoặc hình ảnh để được kỹ thuật tư vấn.</p>';
+  pestModal.hidden = false;
+  document.body.classList.add('modal-open');
+  const modalUrl = new URL(location.href); modalUrl.searchParams.set('pest', pestSlug(name)); history.replaceState(null, '', modalUrl);
+  pestModal.querySelector('.pest-modal-close').focus();
+}
+function closePest() { pestModal.hidden = true; document.body.classList.remove('modal-open'); const cleanUrl = new URL(location.href); cleanUrl.searchParams.delete('pest'); history.replaceState(null, '', cleanUrl); lastPestTrigger?.focus(); }
+document.querySelector('#pestGrid')?.addEventListener('click', event => { const trigger = event.target.closest('[data-pest]'); if (trigger) openPest(trigger.dataset.pest, trigger); });
+pestModal.addEventListener('click', event => { if (event.target.closest('[data-close-pest]')) closePest(); });
+document.addEventListener('keydown', event => { if (event.key === 'Escape' && !pestModal.hidden) closePest(); });
+const requestedPest = params.get('pest');
+if (selected && requestedPest) { const match = selected.pests.find(item => pestSlug(item[0]) === requestedPest); if (match) openPest(match[0], null); }
 
 const navToggle = document.querySelector('.nav-toggle');
 const nav = document.querySelector('.nav');
