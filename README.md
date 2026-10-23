@@ -9,6 +9,11 @@ Website giới thiệu và nhận báo giá của Công ty Cổ phần Khoa họ
 - Chi tiết hoạt chất, công dụng và đối tượng phòng trừ
 - Form yêu cầu báo giá gửi về email doanh nghiệp
 - Thông tin liên hệ và pháp lý
+- Danh mục 10 nhóm cây trồng với 8 loại sâu, bệnh hại và hướng quản lý cho từng cây
+
+## Nguồn ảnh cây trồng
+
+Ảnh đại diện tại `assets/crops/` được tuyển chọn từ Wikimedia Commons (truy cập 24/10/2026), gồm các tệp: Green rice sheaves planted in a paddy field; Lychee Fruit; Owoce Durian; Coffee plant with berries; Longan tree at Pine Island Nursery; Mangos - single and halved; Tea garden at Nagri; Rottenburg Wurmlingen Kapellenberg; Das Kohlfeld; Field corn Liechtenstein. Điều khoản tác giả và giấy phép theo từng trang tệp gốc trên Wikimedia Commons.
 
 ## Chạy tại máy
 
