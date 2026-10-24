@@ -61,6 +61,13 @@ const pestDetails = {
 
 const pestFallback = ['Tên khoa học cần xác định theo mẫu thực tế','Chu kỳ phát sinh thay đổi theo loài, nhiệt độ và ẩm độ. Theo dõi đồng ruộng thường xuyên để xác định đỉnh phát sinh.','Giai đoạn non hoặc mô cây non thường mẫn cảm nhất; cần nhận diện sớm trước khi thiệt hại lan rộng.','Chỉ dùng hoạt chất được đăng ký cho đúng cây trồng và dịch hại; đọc kỹ nhãn, luân phiên cơ chế tác động và tuân thủ thời gian cách ly.',[]];
 
+// Hồ sơ riêng theo cây ký chủ cho các bệnh cùng tên nhưng khác tác nhân/triệu chứng.
+const hostPestDetails = {
+  'vai--suong-mai': ['Peronophythora litchii','Mầm bệnh tồn tại trên quả bệnh và tàn dư; bào tử phát tán theo mưa, gió. Nhiễm mới xảy ra rất nhanh khi ẩm độ cao, mưa phùn và nhiệt độ khoảng 20–25°C.','Hại chùm hoa và quả vải từ non đến chín. Vết nâu lan từ cuống, sau phủ lớp tơ–bào tử trắng; quả thối, nứt hoặc rụng hàng loạt.','Tỉa tán, thu gom quả bệnh và giảm thời gian ướt tán; dùng dimethomorph, mandipropamid, metalaxyl-M hoặc hoạt chất được đăng ký, luân phiên FRAC và tuân thủ cách ly.',['nekko']],
+  'nhan--suong-mai': ['Peronophythora litchii','Bào tử từ mô bệnh lan theo mưa và nước bắn, xâm nhiễm hoa, cuống và quả non trong những đợt ẩm lạnh. Bệnh có thể phát triển nhanh chỉ sau vài ngày thời tiết thuận lợi.','Ban đầu là chấm nâu đen quanh cuống và hoa; vết bệnh lan dọc chùm, mô thối nâu và có lớp mốc trắng mịn khi ẩm, làm hoa và quả non rụng.','Tạo tán thoáng, loại chùm bệnh và tránh tưới ướt tán; dùng hoạt chất phòng oomycete đã đăng ký như dimethomorph, mandipropamid hoặc metalaxyl-M, luân phiên FRAC.',['nekko']],
+  'hoa-thap-tu--suong-mai': ['Hyaloperonospora brassicae (H. parasitica)','Bào tử phát tán theo gió và nước bắn, nảy mầm khi lá ướt trong điều kiện mát ẩm. Nhiều chu kỳ nhiễm nối tiếp có thể làm bệnh bùng phát nhanh ở vườn ươm và ruộng trồng dày.','Mặt trên lá có đốm vàng nhạt, thường bị giới hạn bởi gân; mặt dưới tương ứng xuất hiện lớp mốc trắng xám. Lá già cháy nâu, cây con có thể còi hoặc chết.','Dùng hạt giống sạch, luân canh, trồng thoáng và tưới buổi sáng; dùng dimethomorph, mandipropamid, metalaxyl-M, cymoxanil hoặc hoạt chất đăng ký, luân phiên FRAC.',['nekko']]
+};
+
 function pestSlug(value) {
   return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 }
@@ -105,16 +112,18 @@ const verifiedCommonsPhotos = {
   'Sâu keo mùa thu':'Spodoptera frugiperda in stalk of Zea mays.jpg',
   'Sâu xám':'Agrotis ipsilon larva.jpg'
 };
-const verifiedHostPhotos = new Set(['lua--dao-on','lua--bac-la','lua--kho-van','vai--sau-duc-cuong-qua','vai--suong-mai','vai--than-thu','vai--thoi-qua','ca-phe--gi-sat','xoai--than-thu','xoai--phan-trang','xoai--xi-mu-than','xoai--dom-den-vi-khuan','che--dom-nau','cay-an-qua--loet-vi-khuan','cay-an-qua--nam-bo-hong','hoa-thap-tu--sung-re','hoa-thap-tu--thoi-nhun','ngo--dom-la-lon','ngo--gi-sat','ngo--thoi-than-thoi-bap']);
+const verifiedHostPhotos = new Set(['lua--dao-on','lua--bac-la','lua--kho-van','vai--sau-duc-cuong-qua','vai--suong-mai','vai--than-thu','vai--thoi-qua','nhan--suong-mai','ca-phe--gi-sat','xoai--than-thu','xoai--phan-trang','xoai--xi-mu-than','xoai--dom-den-vi-khuan','che--dom-nau','cay-an-qua--loet-vi-khuan','cay-an-qua--nam-bo-hong','hoa-thap-tu--sung-re','hoa-thap-tu--thoi-nhun','hoa-thap-tu--suong-mai','ngo--dom-la-lon','ngo--gi-sat','ngo--thoi-than-thoi-bap']);
 const verifiedHostPhotoSources = {
   'vai--sau-duc-cuong-qua': {source:'Minh họa khoa học · đúng cây vải và pha sâu non', href:'#image-sources'},
   'vai--than-thu': {source:'Frontiers in Plant Science · CC BY · ảnh thán thư trên quả vải', href:'https://doi.org/10.3389/fpls.2025.1688675'},
   'vai--suong-mai': {source:'Agriculture (MDPI) · CC BY · bệnh sương mai trên quả vải', href:'https://doi.org/10.3390/agriculture12030402'},
+  'nhan--suong-mai': {source:'Minh họa khoa học theo mô tả bệnh học Plantwise · Peronophythora litchii trên nhãn', href:'https://plantwiseplusknowledgebank.org/doi/full/10.1079/pwkb.20157800696'},
+  'hoa-thap-tu--suong-mai': {source:'W. Brand / Wikimedia Commons · CC BY 4.0 · Hyaloperonospora parasitica trên cải thảo', href:'https://commons.wikimedia.org/wiki/File:Chinakohl_2_Falscher_Mehltau-Brand.jpg'},
   'vai--thoi-qua': {source:'Minh họa khoa học · triệu chứng thối quả vải', href:'#image-sources'}
 };
 function pestPhoto(cropId, name) {
   const hostKey = `${cropId}--${pestSlug(name)}`;
-  if (verifiedHostPhotos.has(hostKey)) return {src:`assets/pests-verified/${hostKey}.webp`, ...(verifiedHostPhotoSources[hostKey] || {source:'Ảnh triệu chứng nguồn mở đã kiểm chứng', href:'#image-sources'})};
+  if (verifiedHostPhotos.has(hostKey)) return {src:`assets/pests-verified/${hostKey}.webp?v=20261024-2`, ...(verifiedHostPhotoSources[hostKey] || {source:'Ảnh triệu chứng nguồn mở đã kiểm chứng', href:'#image-sources'})};
   if (verifiedCommonsPhotos[name]) return {src:`assets/pests-verified/${pestSlug(name)}.webp`, source:'Wikimedia Commons · ảnh đúng giai đoạn gây hại', href:`https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=${encodeURIComponent(verifiedCommonsPhotos[name])}`};
   if (verifiedPestPhotos[name]) return {src:`assets/pests-verified/${pestSlug(name)}.webp`, source:`iNaturalist · ${verifiedPestPhotos[name][1]}`, href:`https://www.inaturalist.org/photos/${verifiedPestPhotos[name][0]}`};
   if (verifiedGenericPhotos.has(name)) return {src:`assets/pests-verified/${pestSlug(name)}.webp`, source:'Wikimedia Commons · giấy phép mở', href:'#image-sources'};

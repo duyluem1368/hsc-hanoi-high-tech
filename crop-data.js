@@ -104,7 +104,7 @@ const cropSolutions = [
     ]
   },
   {
-    id: 'hoa-thap-tu', name: 'Cây hoa thập tự', image: 'assets/crops/hoa-thap-tu.webp', summary: 'Giải pháp cho bắp cải, súp lơ, cải xanh và các rau họ cải.',
+    id: 'hoa-thap-tu', name: 'Cây hoa thập tự', image: 'assets/crops/hoa-thap-tu.webp?v=20261024-2', summary: 'Giải pháp cho bắp cải, súp lơ, cải xanh và các rau họ cải.',
     pests: [
       ['Sâu tơ', 'Sâu nhỏ ăn mặt dưới lá tạo lỗ thủng, dễ kháng thuốc và gây hại liên tục.', 'Luân canh, lưới chắn, bảo vệ thiên địch; dùng Bt và luân phiên nhóm thuốc khi sâu tuổi nhỏ.'],
       ['Sâu xanh bướm trắng', 'Sâu non ăn lá từ mép vào, để lại gân chính khi mật số cao.', 'Bắt ổ trứng và sâu non, che lưới, dùng chế phẩm sinh học; xử lý sớm trước khi sâu lớn.'],

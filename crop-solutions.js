@@ -38,11 +38,14 @@ function openPest(name, trigger) {
   const crop = selected;
   const pest = crop?.pests.find(item => item[0] === name);
   if (!pest) return;
-  const info = pestDetails[name] || pestFallback;
+  const info = hostPestDetails[`${crop.id}--${pestSlug(name)}`] || pestDetails[name] || pestFallback;
   const photo = pestPhoto(crop.id, name);
   lastPestTrigger = trigger;
   document.querySelector('#pestModalImage').src = photo.src;
   document.querySelector('#pestModalImage').alt = `${name} – hình ảnh nhận dạng`;
+  const photoSource = document.querySelector('#pestPhotoSource');
+  photoSource.textContent = photo.source;
+  photoSource.href = photo.href;
   document.querySelector('#pestModalCrop').textContent = crop.name;
   document.querySelector('#pestModalTitle').textContent = name;
   document.querySelector('#pestScientific').textContent = info[0];
