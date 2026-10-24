@@ -59,8 +59,8 @@ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){setInterval((
 const heroImage=document.querySelector('.hero-product-current');
 const heroName=document.querySelector('#heroProductName');
 const heroDots=document.querySelector('.hero-dots');
-const transparentAssets={eagle:'eagle-50wg-transparent.webp',fujimin:'fujimin-20sl-transparent.webp',foszateha:'foszateha-24sc-transparent.webp',miteafy:'miteafy-24sc-transparent.webp',bifenav:'bifenav-100ec-transparent.webp',acpratin:'acpratin-250ec-transparent.webp',luckyler:'luckyler-tuktuk-transparent.webp',tuktuk:'luckyler-tuktuk-transparent.webp',inpyranafy:'inpyranafy-10sc-transparent.webp',probicol:'probicol-tripro-transparent.webp',tripro:'probicol-tripro-transparent.webp',sectox:'sectox-700wg-transparent.webp',wofadan:'wofadan-95sp-transparent.webp',vacimneisu:'vacimneisu-50sl-transparent.webp',abavua:'abavua-36ec-transparent.webp',wofara:'wofara-300wg-transparent.webp'};
-const heroProducts=products.filter(product=>transparentAssets[product.id]).sort(()=>Math.random()-.5).slice(0,5).map(product=>({...product,image:`assets/products/${transparentAssets[product.id]}`}));
+const heroAssets={naldaphos:'assets/products/naldaphos-350ec.webp',emacarb:'assets/products/emacarb-75ec.webp',eagle:'assets/products/eagle-50wg-transparent.webp',binzoleafv:'assets/products/binzoleafv-40sc.webp',tripro:'assets/products/probicol-tripro-transparent.webp'};
+const heroProducts=homeProductIds.map(id=>products.find(product=>product.id===id)).filter(Boolean).map(product=>({...product,image:heroAssets[product.id]||product.image}));
 let heroIndex=0;
 if(heroDots)heroDots.innerHTML=heroProducts.map((_,index)=>`<span class="${index===0?'active':''}"></span>`).join('');
 function showHeroProduct(index){heroIndex=index%heroProducts.length;const product=heroProducts[heroIndex];heroImage.classList.add('switching');setTimeout(()=>{heroImage.src=product.image;heroImage.alt=product.name;heroName.textContent=product.name;heroDots.querySelectorAll('span').forEach((dot,i)=>dot.classList.toggle('active',i===heroIndex));heroImage.classList.remove('switching');},230)}
