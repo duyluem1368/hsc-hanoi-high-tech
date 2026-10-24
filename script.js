@@ -59,7 +59,7 @@ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){setInterval((
 const heroImage=document.querySelector('.hero-product-current');
 const heroName=document.querySelector('#heroProductName');
 const heroDots=document.querySelector('.hero-dots');
-const heroAssets={naldaphos:'assets/products/naldaphos-350ec.webp',emacarb:'assets/products/emacarb-75ec.webp',eagle:'assets/products/eagle-50wg-transparent.webp',binzoleafv:'assets/products/binzoleafv-40sc.webp',tripro:'assets/products/probicol-tripro-transparent.webp'};
+const heroAssets={naldaphos:'assets/products/naldaphos-350ec-transparent.webp',emacarb:'assets/products/emacarb-75ec-transparent.webp',eagle:'assets/products/eagle-50wg-transparent.webp',binzoleafv:'assets/products/binzoleafv-40sc-transparent.webp',tripro:'assets/products/probicol-tripro-transparent.webp'};
 const heroProducts=homeProductIds.map(id=>products.find(product=>product.id===id)).filter(Boolean).map(product=>({...product,image:heroAssets[product.id]||product.image}));
 let heroIndex=0;
 if(heroDots)heroDots.innerHTML=heroProducts.map((_,index)=>`<span class="${index===0?'active':''}"></span>`).join('');
