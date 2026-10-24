@@ -105,10 +105,16 @@ const verifiedCommonsPhotos = {
   'Sâu keo mùa thu':'Spodoptera frugiperda in stalk of Zea mays.jpg',
   'Sâu xám':'Agrotis ipsilon larva.jpg'
 };
-const verifiedHostPhotos = new Set(['lua--dao-on','lua--bac-la','lua--kho-van','ca-phe--gi-sat','xoai--than-thu','xoai--phan-trang','xoai--xi-mu-than','xoai--dom-den-vi-khuan','che--dom-nau','cay-an-qua--loet-vi-khuan','cay-an-qua--nam-bo-hong','hoa-thap-tu--sung-re','hoa-thap-tu--thoi-nhun','ngo--dom-la-lon','ngo--gi-sat','ngo--thoi-than-thoi-bap']);
+const verifiedHostPhotos = new Set(['lua--dao-on','lua--bac-la','lua--kho-van','vai--sau-duc-cuong-qua','vai--suong-mai','vai--than-thu','vai--thoi-qua','ca-phe--gi-sat','xoai--than-thu','xoai--phan-trang','xoai--xi-mu-than','xoai--dom-den-vi-khuan','che--dom-nau','cay-an-qua--loet-vi-khuan','cay-an-qua--nam-bo-hong','hoa-thap-tu--sung-re','hoa-thap-tu--thoi-nhun','ngo--dom-la-lon','ngo--gi-sat','ngo--thoi-than-thoi-bap']);
+const verifiedHostPhotoSources = {
+  'vai--sau-duc-cuong-qua': {source:'Minh họa khoa học · đúng cây vải và pha sâu non', href:'#image-sources'},
+  'vai--than-thu': {source:'Frontiers in Plant Science · CC BY · ảnh thán thư trên quả vải', href:'https://doi.org/10.3389/fpls.2025.1688675'},
+  'vai--suong-mai': {source:'Agriculture (MDPI) · CC BY · bệnh sương mai trên quả vải', href:'https://doi.org/10.3390/agriculture12030402'},
+  'vai--thoi-qua': {source:'Minh họa khoa học · triệu chứng thối quả vải', href:'#image-sources'}
+};
 function pestPhoto(cropId, name) {
   const hostKey = `${cropId}--${pestSlug(name)}`;
-  if (verifiedHostPhotos.has(hostKey)) return {src:`assets/pests-verified/${hostKey}.webp`, source:'Ảnh triệu chứng nguồn mở đã kiểm chứng', href:'#image-sources'};
+  if (verifiedHostPhotos.has(hostKey)) return {src:`assets/pests-verified/${hostKey}.webp`, ...(verifiedHostPhotoSources[hostKey] || {source:'Ảnh triệu chứng nguồn mở đã kiểm chứng', href:'#image-sources'})};
   if (verifiedCommonsPhotos[name]) return {src:`assets/pests-verified/${pestSlug(name)}.webp`, source:'Wikimedia Commons · ảnh đúng giai đoạn gây hại', href:`https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=${encodeURIComponent(verifiedCommonsPhotos[name])}`};
   if (verifiedPestPhotos[name]) return {src:`assets/pests-verified/${pestSlug(name)}.webp`, source:`iNaturalist · ${verifiedPestPhotos[name][1]}`, href:`https://www.inaturalist.org/photos/${verifiedPestPhotos[name][0]}`};
   if (verifiedGenericPhotos.has(name)) return {src:`assets/pests-verified/${pestSlug(name)}.webp`, source:'Wikimedia Commons · giấy phép mở', href:'#image-sources'};
