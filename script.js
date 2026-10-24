@@ -46,9 +46,10 @@ let modalGalleryTimer=null;
 function productCard(p){return `<article class="product-card" data-cat="${p.cat}">${p.featured?'<span class="badge">Nổi bật</span>':''}<button class="product-open" type="button" data-product="${p.id}" aria-label="Xem chi tiết ${p.name}"><div class="product-img"><img src="${p.image}" alt="${p.name}" loading="lazy">${p.gallery?.length>1?'<span class="gallery-mark" aria-hidden="true">● ●</span>':''}</div><small>${p.type}</small><h3>${p.name}</h3><p>${p.lead}</p><span class="card-link">Xem chi tiết <b>→</b></span></button></article>`}
 const allProductsPage=document.body.dataset.page==='products';
 function productGroup(p){return p.cat.includes('co')?'co':p.cat.includes('benh')?'benh':'sau'}
+const homeProductIds=['naldaphos','emacarb','eagle','binzoleafv','tripro'];
 function productsForHome(filter='all'){
   if(filter!=='all')return products.filter(p=>p.cat.includes(filter)).sort((a,b)=>Number(Boolean(b.homeFeatured))-Number(Boolean(a.homeFeatured))).slice(0,3);
-  return ['sau','benh','co'].flatMap(group=>products.filter(p=>productGroup(p)===group).sort((a,b)=>Number(Boolean(b.homeFeatured))-Number(Boolean(a.homeFeatured))).slice(0,3));
+  return homeProductIds.map(id=>products.find(product=>product.id===id)).filter(Boolean);
 }
 function renderProducts(filter='all'){grid.innerHTML=(allProductsPage?(filter==='all'?products:products.filter(p=>p.cat.includes(filter))):productsForHome(filter)).map(productCard).join('')}
 renderProducts();
