@@ -30,7 +30,10 @@ const products = [
   {id:'naldaphos',name:'Naldaphos 350EC',type:'Thuốc trừ sâu',image:'assets/products/naldaphos-350ec.webp',cat:'sau nhen',active:'Quinalphos 250 g/L + Fenpropathrin 100 g/L',lead:'Phối hợp lân hữu cơ và cúc tổng hợp, tác động nhanh và mạnh.',use:'Tác động tiếp xúc, vị độc và xông hơi; sử dụng đúng phạm vi đăng ký và thời gian cách ly.',targets:'Nhện gié hại lúa.',crops:'Lúa.'}
 ];
 for(const product of (window.HSC_PRODUCT_ADDITIONS||[])){
-  if(!products.some(item=>item.id===product.id))products.push(product);
+  const existing=products.find(item=>item.id===product.id);
+  if(!existing){products.push(product);continue}
+  const gallery=[...(existing.gallery||[existing.image]),...(product.gallery||[product.image])];
+  existing.gallery=[...new Set(gallery)];
 }
 
 const grid=document.querySelector('#productGrid');
