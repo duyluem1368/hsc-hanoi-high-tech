@@ -51,8 +51,12 @@ function openPest(name, trigger) {
   document.querySelector('#pestDamage').textContent = info[2];
   document.querySelector('#pestControl').textContent = pest[2];
   document.querySelector('#pestChemical').textContent = info[3];
-  const links = info[4].map(id => ({ id, item: hscProducts[id] })).filter(entry => entry.item);
-  document.querySelector('#linkedProducts').innerHTML = links.length ? `<h3>Sản phẩm HSC liên quan</h3><p class="product-scope-note">Sản phẩm được đối chiếu theo hoạt chất/đối tượng. Chỉ sử dụng khi nhãn sản phẩm có đăng ký cho đúng cây trồng và dịch hại đang xử lý.</p><div class="linked-product-grid">${links.map(({id,item}) => `<a href="index.html?product=${id}#products"><img src="${item[2]}" alt="${item[0]}" loading="lazy"><span><strong>${item[0]}</strong><small>${item[1]}</small><b>Xem sản phẩm →</b></span></a>`).join('')}</div>` : '<p class="no-product">HSC chưa có sản phẩm trong danh mục trực tuyến khớp trực tiếp với đối tượng này. Vui lòng gửi mẫu hoặc hình ảnh để được kỹ thuật tư vấn.</p>';
+  const manualLinks = info[4].map(id => ({ id, item: hscProducts[id] })).filter(entry => entry.item);
+  const automaticLinks = (window.HSC_PRODUCT_ADDITIONS || [])
+    .filter(product => product.relatedPests?.includes(name))
+    .map(product => ({id:product.id,item:[product.name,product.active,product.image]}));
+  const links = [...manualLinks, ...automaticLinks].filter((entry,index,list)=>list.findIndex(other=>other.id===entry.id)===index);
+  document.querySelector('#linkedProducts').innerHTML = links.length ? `<h3>Sản phẩm HSC liên quan</h3><p class="product-scope-note">Danh sách tự động cập nhật theo hoạt chất/đối tượng. Chỉ sử dụng khi nhãn sản phẩm có đăng ký cho đúng cây trồng và dịch hại đang xử lý.</p><div class="linked-product-grid">${links.map(({id,item}) => `<a href="products.html?product=${id}"><img src="${item[2]}" alt="${item[0]}" loading="lazy"><span><strong>${item[0]}</strong><small>${item[1]}</small><b>Xem sản phẩm →</b></span></a>`).join('')}</div>` : '<p class="no-product">HSC chưa có sản phẩm trong danh mục trực tuyến khớp trực tiếp với đối tượng này. Vui lòng gửi mẫu hoặc hình ảnh để được kỹ thuật tư vấn.</p>';
   pestModal.hidden = false;
   document.body.classList.add('modal-open');
   const modalUrl = new URL(location.href); modalUrl.searchParams.set('pest', pestSlug(name)); history.replaceState(null, '', modalUrl);

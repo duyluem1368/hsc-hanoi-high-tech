@@ -29,6 +29,9 @@ const products = [
   {id:'blurius',name:'Blurius 200WP',type:'Thuốc trừ cỏ',image:'assets/products/blurius-200wp.webp',gallery:['assets/products/blurius-200wp.webp','assets/products/blurius-200wp-alt.webp'],cat:'co',active:'Acetochlor 160 g/kg + Pyrazosulfuron-ethyl 40 g/kg',lead:'Thuốc trừ cỏ chọn lọc phối hợp hai hoạt chất.',use:'Ức chế nảy mầm và diệt cỏ non; sử dụng đúng thời điểm sau cấy và theo hướng dẫn trên nhãn.',targets:'Cỏ lồng vực, cỏ đuôi phụng, cỏ chác lác, cỏ mác và cỏ lá rộng.',crops:'Lúa cấy.',homeFeatured:true},
   {id:'naldaphos',name:'Naldaphos 350EC',type:'Thuốc trừ sâu',image:'assets/products/naldaphos-350ec.webp',cat:'sau nhen',active:'Quinalphos 250 g/L + Fenpropathrin 100 g/L',lead:'Phối hợp lân hữu cơ và cúc tổng hợp, tác động nhanh và mạnh.',use:'Tác động tiếp xúc, vị độc và xông hơi; sử dụng đúng phạm vi đăng ký và thời gian cách ly.',targets:'Nhện gié hại lúa.',crops:'Lúa.'}
 ];
+for(const product of (window.HSC_PRODUCT_ADDITIONS||[])){
+  if(!products.some(item=>item.id===product.id))products.push(product);
+}
 
 const grid=document.querySelector('#productGrid');
 const modal=document.querySelector('#productModal');
