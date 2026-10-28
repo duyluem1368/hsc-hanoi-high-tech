@@ -1,6 +1,6 @@
 const cropSolutions = [
   {
-    id: 'lua', name: 'Cây lúa', image: 'assets/crops/lua.webp', summary: 'Giải pháp quản lý sâu bệnh chủ yếu trên lúa từ mạ đến chín.',
+    id: 'lua', name: 'Cây lúa', image: 'assets/crops/lua-2026.webp', summary: 'Giải pháp quản lý sâu bệnh chủ yếu trên lúa từ mạ đến chín.',
     pests: [
       ['Rầy nâu', 'Rầy chích hút ở bẹ và thân, làm cây vàng lụi; mật số cao có thể gây cháy rầy và truyền virus.', 'Gieo sạ đồng loạt, mật độ hợp lý, bón đạm cân đối; thăm đồng sát gốc và chỉ xử lý khi đạt ngưỡng theo khuyến cáo địa phương.'],
       ['Sâu cuốn lá nhỏ', 'Sâu non nhả tơ cuốn lá, ăn phần thịt lá tạo vệt trắng, làm giảm quang hợp.', 'Bảo vệ thiên địch, tránh phun sớm; kiểm tra lá đòng và xử lý sâu tuổi nhỏ khi mật độ vượt ngưỡng.'],
@@ -13,7 +13,7 @@ const cropSolutions = [
     ]
   },
   {
-    id: 'vai', name: 'Cây vải', image: 'assets/crops/vai.webp', summary: 'Bảo vệ lộc, hoa và quả vải trong điều kiện nóng ẩm miền Bắc.',
+    id: 'vai', name: 'Cây vải', image: 'assets/crops/vai-2026.webp', summary: 'Bảo vệ lộc, hoa và quả vải trong điều kiện nóng ẩm miền Bắc.',
     pests: [
       ['Sâu đục cuống quả', 'Sâu non đục qua cuống vào hạt, làm quả rụng hoặc giảm giá trị thương phẩm.', 'Thu gom quả rụng, tỉa tán thông thoáng, theo dõi trưởng thành bằng bẫy; xử lý đúng lứa sâu non mới nở.'],
       ['Bọ xít vải', 'Cả trưởng thành và ấu trùng chích hút lộc, hoa, quả non làm héo và rụng.', 'Rung cây bắt bọ lúc sáng sớm, bảo vệ ong ký sinh, tỉa tán; xử lý ổ dịch khi mật số cao.'],
